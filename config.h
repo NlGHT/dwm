@@ -35,6 +35,7 @@ static const unsigned int alphas[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tagDefaults[] = { "alacritty", "brave", "onlyoffice-desktopeditors", "nautilus", "spotify", "lutris", "krita", "reaper", "discord" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -76,13 +77,14 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
-static const char *brightup[]       = { "light", "-A", "10", NULL };
-static const char *brightdown[]     = { "light", "-U", "10", NULL };
+static const char *brightup[]       = { "light", "-A", "5", NULL };
+static const char *brightdown[]     = { "light", "-U", "5", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,           XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY, 			XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask, XK_x,      spawnDefault,   	   {0} },
 	{ 0,                XF86XK_MonBrightnessUp,    spawn,            {.v = brightup } },
     { 0,                XF86XK_MonBrightnessDown,  spawn,            {.v = brightdown } },
 	{ MODKEY,           XK_b,      togglebar,      {0} },

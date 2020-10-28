@@ -223,6 +223,7 @@ static void setclientstate(Client *c, long state);
 static void setfocus(Client *c);
 static void setfullscreen(Client *c, int fullscreen);
 static void setgaps(const Arg *arg);
+static void setlasttag(unsigned tagnum);
 static void setlayout(const Arg *arg);
 static void setmfact(const Arg *arg);
 static void setup(void);
@@ -230,6 +231,7 @@ static void seturgent(Client *c, int urg);
 static void showhide(Client *c);
 static void sigchld(int unused);
 static void spawn(const Arg *arg);
+static void spawnDefault(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tile(Monitor *);
@@ -305,6 +307,9 @@ static int useargb = 0;
 static Visual *visual;
 static int depth;
 static Colormap cmap;
+
+static unsigned int lastchosentag = 1;
+static unsigned int previouschosentag = 1;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1622,6 +1627,22 @@ setgaps(const Arg *arg)
 	arrange(selmon);
 }
 
+void setlasttag(unsigned int tagbit) {
+	if (tagbit > 0) {
+		unsigned i = 1, pos = 1;
+		while (!(i & tagbit)) {
+			i = i << 1;
+			++pos;
+		}
+		lastchosentag = pos;
+		fprintf(stderr, "Last chosen tag set: %d\n", lastchosentag);
+	} else {
+		const unsigned int tempTag = lastchosentag;
+		lastchosentag = previouschosentag;
+		previouschosentag = tempTag;
+	}
+}
+
 void
 setlayout(const Arg *arg)
 {
@@ -1779,6 +1800,16 @@ spawn(const Arg *arg)
 }
 
 void
+spawnDefault(const Arg *arg)
+{
+	if (tagDefaults[lastchosentag - 1]) {
+		const char *defaultcmd[] = {tagDefaults[lastchosentag - 1], NULL};
+		Arg a = {.v = defaultcmd};
+		spawn(&a);
+	}
+}
+
+void
 tag(const Arg *arg)
 {
 	if (selmon->sel && arg->ui & TAGMASK) {
@@ -1869,6 +1900,7 @@ toggleview(const Arg *arg)
 
 	if (newtagset) {
 		selmon->tagset[selmon->seltags] = newtagset;
+		setlasttag(newtagset);
 		focus(NULL);
 		arrange(selmon);
 	}
@@ -2184,6 +2216,7 @@ view(const Arg *arg)
 {
 	if ((arg->ui & TAGMASK) == selmon->tagset[selmon->seltags])
 		return;
+	setlasttag(arg->ui);
 	selmon->seltags ^= 1; /* toggle sel tagset */
 	if (arg->ui & TAGMASK)
 		selmon->tagset[selmon->seltags] = arg->ui & TAGMASK;
