@@ -79,8 +79,6 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 static const char *brightup[]       = { "light", "-A", "5", NULL };
 static const char *brightdown[]     = { "light", "-U", "5", NULL };
-static const char *volumeup[]     = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
-static const char *volumedown[]     = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
 static const char *togglemuteaudio[]     = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL};
 static const char *togglemutemic[]     = { "amixer", "set", "Capture", "toggle", NULL };
 static const char *pulseAudioSettings[]     = { "pavucontrol" };
@@ -96,8 +94,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, XK_x,      spawnDefault,   	   {0} },
 	{ 0,                XF86XK_MonBrightnessUp,    spawn, {.v = brightup } },
     { 0,                XF86XK_MonBrightnessDown,  spawn, {.v = brightdown } },
-    { 0,                XF86XK_AudioRaiseVolume,  spawn, {.v = volumeup } },
-    { 0,                XF86XK_AudioLowerVolume,  spawn, {.v = volumedown } },
+    { 0,                XF86XK_AudioRaiseVolume,  spawn, SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
+    { 0,                XF86XK_AudioLowerVolume,  spawn, SHCMD("amixer -D pulse sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
     { 0,                XF86XK_AudioMute,  spawn, {.v = togglemuteaudio } },
 	{ MODKEY,           XK_i,      spawn,          {.v = pulseAudioSettings } },
     { 0,                XF86XK_AudioNext,  spawn, {.v = nextsong } },
