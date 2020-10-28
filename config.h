@@ -72,37 +72,52 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
+// Client commands
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
+static const char *filemanagercmd[]  = { "nautilus", NULL };
 
-static const char *brightup[]       = { "light", "-A", "5", NULL };
-static const char *brightdown[]     = { "light", "-U", "5", NULL };
-static const char *togglemuteaudio[]     = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL};
-static const char *togglemutemic[]     = { "amixer", "set", "Capture", "toggle", NULL };
-static const char *pulseAudioSettings[]     = { "pavucontrol" };
-static const char *nextsong[]     = { "playerctl", "--player=spotify", "next", NULL };
-static const char *previoussong[]     = { "playerctl", "--player=spotify", "previous", NULL };
-static const char *togglepausemusic[]     = { "playerctl", "--player=spotify", "play-pause", NULL };
+// Brightness and display
+static const char *brightup[]   = { "light", "-A", "5", NULL };
+static const char *brightdown[] = { "light", "-U", "5", NULL };
 static const char *autorandr[]  = { "AutoRandR", NULL };
 
+// Audio commands
+static const char *togglemuteaudio[]    = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL};
+static const char *togglemutemic[]      = { "amixer", "set", "Capture", "toggle", NULL };
+static const char *pulseAudioSettings[] = { "pavucontrol" };
+static const char *nextsong[]           = { "playerctl", "--player=spotify", "next", NULL };
+static const char *previoussong[]       = { "playerctl", "--player=spotify", "previous", NULL };
+static const char *togglepausemusic[]   = { "playerctl", "--player=spotify", "play-pause", NULL };
+
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	{ MODKEY,           XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY, 			XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask, XK_x,      spawnDefault,   	   {0} },
-	{ 0,                XF86XK_MonBrightnessUp,    spawn, {.v = brightup } },
-    { 0,                XF86XK_MonBrightnessDown,  spawn, {.v = brightdown } },
-    { 0,                XF86XK_AudioRaiseVolume,  spawn, SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
-    { 0,                XF86XK_AudioLowerVolume,  spawn, SHCMD("amixer -D pulse sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
-    { 0,                XF86XK_AudioMute,  spawn, {.v = togglemuteaudio } },
-	{ MODKEY,           XK_i,      spawn,          {.v = pulseAudioSettings } },
-    { 0,                XF86XK_AudioNext,  spawn, {.v = nextsong } },
-    { 0,                XF86XK_AudioPrev,  spawn, {.v = previoussong } },
-    { 0,                XF86XK_AudioPlay,  spawn, {.v = togglepausemusic } },
-    { 0,                XF86XK_AudioMicMute,  spawn, {.v = togglemutemic } },
-	{ 0,                XF86XK_Display,  spawn, {.v = autorandr } },
+	/* modifier          key         function       argument */
+
+	// Applications
+	{ MODKEY,            XK_p,       spawn,         {.v = dmenucmd } },
+	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
+	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
+	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
+
+	// Brightness
+	{ 0,  XF86XK_MonBrightnessUp,    spawn,  {.v = brightup } },
+    { 0,  XF86XK_MonBrightnessDown,  spawn,  {.v = brightdown } },
+
+	// Audio
+    { 0,       XF86XK_AudioRaiseVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
+    { 0,       XF86XK_AudioLowerVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
+    { 0,       XF86XK_AudioMute,         spawn,  {.v = togglemuteaudio } },
+	{ MODKEY,  XK_i,                     spawn,  {.v = pulseAudioSettings } },
+    { 0,       XF86XK_AudioNext,         spawn,  {.v = nextsong } },
+    { 0,       XF86XK_AudioPrev,         spawn,  {.v = previoussong } },
+    { 0,       XF86XK_AudioPlay,         spawn,  {.v = togglepausemusic } },
+    { 0,       XF86XK_AudioMicMute,      spawn,  {.v = togglemutemic } },
+
+	// Display
+	{ 0,  XF86XK_Display,  spawn,  {.v = autorandr } },
+
+	// Main dwm stuff
 	{ MODKEY,           XK_b,      togglebar,      {0} },
 	{ MODKEY,           XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,           XK_k,      focusstack,     {.i = -1 } },
@@ -113,17 +128,23 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask, XK_Return, zoom,           {0} },
 	{ MODKEY,           XK_Tab,    view,           {0} },
 	{ MODKEY, 			XK_q,      killclient,     {0} },
+	{ MODKEY,  		    XK_c,  	   togglefloating, {0} },
+	{ MODKEY,           XK_0,      view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask, XK_0,      tag,            {.ui = ~0 } },
+
+	// Layouts
 	{ MODKEY,           XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,           XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,           XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,           XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask, XK_space,  togglefloating, {0} },
-	{ MODKEY,           XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask, XK_0,      tag,            {.ui = ~0 } },
+
+	// Monitor
 	{ MODKEY,           XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,           XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask, XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask, XK_period, tagmon,         {.i = +1 } },
+
+	// Tags
 	TAGKEYS(            XK_1,                      0)
 	TAGKEYS(            XK_2,                      1)
 	TAGKEYS(            XK_3,                      2)
@@ -140,16 +161,16 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
-	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
-	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkLtSymbol,    0,       Button1,  setlayout,       {0} },
+	{ ClkLtSymbol,    0,       Button3,  setlayout,       {.v = &layouts[2]} },
+	{ ClkWinTitle,    0,       Button2,  zoom,            {0} },
+	{ ClkStatusText,  0,       Button2,  spawn,           {.v = termcmd } },
+	{ ClkClientWin,   MODKEY,  Button1,  movemouse,       {0} },
+	{ ClkClientWin,   MODKEY,  Button2,  togglefloating,  {0} },
+	{ ClkClientWin,   MODKEY,  Button3,  resizemouse,     {0} },
+	{ ClkTagBar,      0,       Button1,  view,            {0} },
+	{ ClkTagBar,      0,       Button3,  toggleview,      {0} },
+	{ ClkTagBar,      MODKEY,  Button1,  tag,             {0} },
+	{ ClkTagBar,      MODKEY,  Button3,  toggletag,       {0} },
 };
 
