@@ -42,11 +42,17 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ "Gimp"      , NULL , NULL           , 0      , 1 , 0 , 0  , -1 } ,
-	{ "Firefox"   , NULL , NULL           , 1 << 8 , 0 , 0 , -1 , -1 } ,
-	{ "Alacritty" , NULL , NULL           , 0      , 0 , 1 , 0  , -1 } ,
-	{ NULL        , NULL , "Event Tester" , 0      , 0 , 0 , 1  , -1 } , /* xev */
+	/* class     instance  title          tags mask isfloating  isterminal  noswallow  monitor */
+	{ "Gimp"      , NULL , NULL           , 0      , 1 , 0 , 0 , -1 } ,
+	{ "DesktopEditors", NULL , NULL       , 1 << 2 , 0 , 0 , 0 , -1 } ,
+	{ "Spotify"   , NULL , NULL           , 1 << 4 , 0 , 0 , 0 , -1 } ,
+	{ "Lutris"    , NULL , NULL           , 1 << 5 , 0 , 0 , 0 , -1 } ,
+	{ "krita"     , NULL , NULL           , 1 << 6 , 0 , 0 , 0 , -1 } ,
+	{ "REAPER"    , NULL , NULL           , 1 << 7 , 0 , 0 , 0 , -1 } ,
+	{ "Discord"   , NULL , NULL           , 1 << 8 , 0 , 0 , 0 , -1 } ,
+	{ "Caprine"   , NULL , NULL           , 1 << 8 , 0 , 0 , 0 , -1 } ,
+	{ "Alacritty" , NULL , NULL           , 0      , 0 , 1 , 0 , -1 } ,
+	{ NULL        , NULL , "Event Tester" , 0      , 0 , 0 , 1 , -1 } , /* xev */
 };
 
 /* layout(s) */
