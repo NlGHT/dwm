@@ -79,14 +79,32 @@ static const char *termcmd[]  = { "alacritty", NULL };
 
 static const char *brightup[]       = { "light", "-A", "5", NULL };
 static const char *brightdown[]     = { "light", "-U", "5", NULL };
+static const char *volumeup[]     = { "amixer", "-D", "pulse", "sset", "Master", "5%+", NULL };
+static const char *volumedown[]     = { "amixer", "-D", "pulse", "sset", "Master", "5%-", NULL };
+static const char *togglemuteaudio[]     = { "amixer", "-D", "pulse", "set", "Master", "1+", "toggle", NULL};
+static const char *togglemutemic[]     = { "amixer", "set", "Capture", "toggle", NULL };
+static const char *pulseAudioSettings[]     = { "pavucontrol" };
+static const char *nextsong[]     = { "playerctl", "--player=spotify", "next", NULL };
+static const char *previoussong[]     = { "playerctl", "--player=spotify", "previous", NULL };
+static const char *togglepausemusic[]     = { "playerctl", "--player=spotify", "play-pause", NULL };
+static const char *autorandr[]  = { "AutoRandR", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,           XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY, 			XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask, XK_x,      spawnDefault,   	   {0} },
-	{ 0,                XF86XK_MonBrightnessUp,    spawn,            {.v = brightup } },
-    { 0,                XF86XK_MonBrightnessDown,  spawn,            {.v = brightdown } },
+	{ 0,                XF86XK_MonBrightnessUp,    spawn, {.v = brightup } },
+    { 0,                XF86XK_MonBrightnessDown,  spawn, {.v = brightdown } },
+    { 0,                XF86XK_AudioRaiseVolume,  spawn, {.v = volumeup } },
+    { 0,                XF86XK_AudioLowerVolume,  spawn, {.v = volumedown } },
+    { 0,                XF86XK_AudioMute,  spawn, {.v = togglemuteaudio } },
+	{ MODKEY,           XK_i,      spawn,          {.v = pulseAudioSettings } },
+    { 0,                XF86XK_AudioNext,  spawn, {.v = nextsong } },
+    { 0,                XF86XK_AudioPrev,  spawn, {.v = previoussong } },
+    { 0,                XF86XK_AudioPlay,  spawn, {.v = togglepausemusic } },
+    { 0,                XF86XK_AudioMicMute,  spawn, {.v = togglemutemic } },
+	{ 0,                XF86XK_Display,  spawn, {.v = autorandr } },
 	{ MODKEY,           XK_b,      togglebar,      {0} },
 	{ MODKEY,           XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,           XK_k,      focusstack,     {.i = -1 } },
