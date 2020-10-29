@@ -80,9 +80,10 @@ static const Layout layouts[] = {
 
 // Client commands
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
-static const char *filemanagercmd[]  = { "nautilus", NULL };
+static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *termcmd[]        = { "alacritty", NULL };
+static const char *filemanagercmd[] = { "nautilus", NULL };
+static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
 
 // Brightness and display
 static const char *brightup[]   = { "light", "-A", "5", NULL };
@@ -105,6 +106,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
 	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
+	{ MODKEY|ShiftMask,  XK_Print,   spawn,         {.v = screencapcmd } },
 
 	// Brightness
 	{ 0,  XF86XK_MonBrightnessUp,    spawn,  {.v = brightup } },
