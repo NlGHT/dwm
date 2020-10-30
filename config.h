@@ -109,7 +109,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
 	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
-	{ MODKEY|ShiftMask,  XK_Print,   spawn,         {.v = screencapcmd } },
+	{ 0,                 XK_Print,   spawn,         {.v = screencapcmd } },
 
 	// Brightness
 	{ 0,  XF86XK_MonBrightnessUp,    spawn,  {.v = brightup } },
