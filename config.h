@@ -22,7 +22,6 @@ static const char col_cyan[]        = "#005577";
 static const char col_red[]         = "#C02519";
 static const char col_maroon[]      = "#990000";
 static const char col_black[]       = "#000000";
-// static const unsigned int baralpha = 0x32;
 static const unsigned int baralpha = 0x28;
 static const unsigned int borderalpha = 0xa;
 static const char *colors[][3]      = {
@@ -141,8 +140,8 @@ static Key keys[] = {
 	{ MODKEY,            XK_Tab,     view,            {0} },
 	{ MODKEY,            XK_q,       killclient,      {0} },
 	{ MODKEY,            XK_c,       togglefloating,  {0} },
-	// { MODKEY,            XK_f,       togglefullscr,   {0} },
-	// { MODKEY,            XK_u,       focusurgent,     {0} },
+	{ MODKEY,            XK_f,       togglefullscr,   {0} },
+	{ MODKEY,            XK_u,       focusurgent,     {0} },
 	{ MODKEY,            XK_0,       view,            {.ui = ~0 } },
 	{ MODKEY|ShiftMask,  XK_0,       tag,             {.ui = ~0 } },
 
