@@ -107,7 +107,7 @@ static Key keys[] = {
 	// Applications
 	{ MODKEY,            XK_p,       spawn,         {.v = dmenucmd } },
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
-	// { MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
+	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
 	{ MODKEY|ShiftMask,  XK_Print,   spawn,         {.v = screencapcmd } },
 
