@@ -114,17 +114,17 @@ static Key keys[] = {
 
 	// Brightness
 	{ 0,  XF86XK_MonBrightnessUp,    spawn,  {.v = brightup } },
-    { 0,  XF86XK_MonBrightnessDown,  spawn,  {.v = brightdown } },
+	{ 0,  XF86XK_MonBrightnessDown,  spawn,  {.v = brightdown } },
 
 	// Audio
-    { 0,       XF86XK_AudioRaiseVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
-    { 0,       XF86XK_AudioLowerVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
-    { 0,       XF86XK_AudioMute,         spawn,  {.v = togglemuteaudio } },
+	{ 0,       XF86XK_AudioRaiseVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
+	{ 0,       XF86XK_AudioLowerVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
+	{ 0,       XF86XK_AudioMute,         spawn,  {.v = togglemuteaudio } },
 	{ MODKEY,  XK_i,                     spawn,  {.v = pulseAudioSettings } },
-    { 0,       XF86XK_AudioNext,         spawn,  {.v = nextsong } },
-    { 0,       XF86XK_AudioPrev,         spawn,  {.v = previoussong } },
-    { 0,       XF86XK_AudioPlay,         spawn,  {.v = togglepausemusic } },
-    { 0,       XF86XK_AudioMicMute,      spawn,  {.v = togglemutemic } },
+	{ 0,       XF86XK_AudioNext,         spawn,  {.v = nextsong } },
+	{ 0,       XF86XK_AudioPrev,         spawn,  {.v = previoussong } },
+	{ 0,       XF86XK_AudioPlay,         spawn,  {.v = togglepausemusic } },
+	{ 0,       XF86XK_AudioMicMute,      spawn,  {.v = togglemutemic } },
 
 	// Display
 	{ 0,  XF86XK_Display,  spawn,  {.v = autorandr } },
@@ -160,15 +160,15 @@ static Key keys[] = {
 
 	// Tags
 	TAGKEYS(            XK_1,                      0)
-	TAGKEYS(            XK_2,                      1)
-	TAGKEYS(            XK_3,                      2)
-	TAGKEYS(            XK_4,                      3)
-	TAGKEYS(            XK_5,                      4)
-	TAGKEYS(            XK_6,                      5)
-	TAGKEYS(            XK_7,                      6)
-	TAGKEYS(            XK_8,                      7)
-	TAGKEYS(            XK_9,                      8)
-	{ MODKEY|ShiftMask, XK_q,      quit,           {0} },
+		TAGKEYS(            XK_2,                      1)
+		TAGKEYS(            XK_3,                      2)
+		TAGKEYS(            XK_4,                      3)
+		TAGKEYS(            XK_5,                      4)
+		TAGKEYS(            XK_6,                      5)
+		TAGKEYS(            XK_7,                      6)
+		TAGKEYS(            XK_8,                      7)
+		TAGKEYS(            XK_9,                      8)
+		{ MODKEY|ShiftMask, XK_q,      quit,           {0} },
 };
 
 /* button definitions */
