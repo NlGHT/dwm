@@ -12,7 +12,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;   /* 0 means no systray */
-static const char *fonts[]          = { "monospace:size=12" };
+static const char *fonts[]          = { "InputMono:size=12" };
 static const char dmenufont[]       = "monospace:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -22,7 +22,7 @@ static const char col_cyan[]        = "#005577";
 static const char col_red[]         = "#C02519";
 static const char col_maroon[]      = "#990000";
 static const char col_black[]       = "#000000";
-static const unsigned int baralpha = 0x28;
+static const unsigned int baralpha    = 0x28;
 static const unsigned int borderalpha = 0xa;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -38,6 +38,7 @@ static const unsigned int alphas[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+// static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
 static const char *tagDefaults[] = { "alacritty", "brave", "onlyoffice-desktopeditors", "nautilus", "spotify", "lutris", "krita", "reaper", "discord" };
 
 static const Rule rules[] = {
