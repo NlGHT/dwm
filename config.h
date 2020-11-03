@@ -86,8 +86,8 @@ static const Layout layouts[] = {
 
 // Client commands
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]       = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray2, "-sf", col_gray4, NULL };
-static const char *rofiappmenu[]    = { "rofi", "-monitor", dmenumon, "-matching", "regex", "-show", "drun", "-modi", "drun", NULL };
+static const char *dmenucmd[]       = { "dmenu_run", "-b", "-m", "-1", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray2, "-sf", col_gray4, NULL };
+static const char *rofiappmenu[]    = { "rofi", "-monitor", "-1", "-matching", "regex", "-show", "drun", "-modi", "drun", NULL };
 static const char *termcmd[]        = { "alacritty", NULL };
 static const char *filemanagercmd[] = { "nautilus", NULL };
 static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
