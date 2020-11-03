@@ -13,7 +13,7 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;   /* 0 means no systray */
 static const char *fonts[]          = { "InputMono:size=12" };
-static const char dmenufont[]       = "monospace:size=12";
+static const char dmenufont[]       = "InputMono:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -50,6 +50,8 @@ static const Rule rules[] = {
 	{ "Gimp"      , NULL , NULL           , 0      , 1 , 0 , 0 , -1 } ,
 	{ "DesktopEditors", NULL , NULL       , 1 << 2 , 0 , 0 , 0 , -1 } ,
 	{ "Spotify"   , NULL , NULL           , 1 << 4 , 0 , 0 , 0 , -1 } ,
+	{ "eog"       , NULL , NULL           , 1 << 4 , 0 , 0 , 0 , -1 } ,
+	{ "vlc"       , NULL , NULL           , 1 << 4 , 0 , 0 , 0 , -1 } ,
 	{ "Lutris"    , NULL , NULL           , 1 << 5 , 0 , 0 , 0 , -1 } ,
 	{ "krita"     , NULL , NULL           , 1 << 6 , 0 , 0 , 0 , -1 } ,
 	{ "REAPER"    , NULL , NULL           , 1 << 7 , 0 , 0 , 0 , -1 } ,
@@ -84,7 +86,8 @@ static const Layout layouts[] = {
 
 // Client commands
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[]       = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[]       = { "dmenu_run", "-b", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray2, "-sf", col_gray4, NULL };
+static const char *rofiappmenu[]    = { "rofi", "-monitor", dmenumon, "-matching", "regex", "-show", "drun", "-modi", "drun", NULL };
 static const char *termcmd[]        = { "alacritty", NULL };
 static const char *filemanagercmd[] = { "nautilus", NULL };
 static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
@@ -107,6 +110,7 @@ static Key keys[] = {
 
 	// Applications
 	{ MODKEY,            XK_p,       spawn,         {.v = dmenucmd } },
+	{ MODKEY,            XK_e,       spawn,         {.v = rofiappmenu } },
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
 	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
