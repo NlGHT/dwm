@@ -18,7 +18,8 @@ static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char col_cyan[]        = "#70c0ba";
+static const char col_blue[]        = "#005577";
 static const char col_red[]         = "#C02519";
 static const char col_maroon[]      = "#990000";
 static const char col_black[]       = "#000000";
@@ -27,7 +28,7 @@ static const unsigned int borderalpha = 0xa;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_black, col_black },
+	[SchemeSel]  = { col_cyan,  col_black, col_black },
 };
 
 static const unsigned int alphas[][3]      = {
@@ -114,6 +115,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
 	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
+	{ MODKEY|ShiftMask,  XK_r,       spawn,         SHCMD("researchPapers") },
 	{ 0,                 XK_Print,   spawn,         {.v = screencapcmd } },
 
 	// Brightness
@@ -164,15 +166,15 @@ static Key keys[] = {
 
 	// Tags
 	TAGKEYS(            XK_1,                      0)
-		TAGKEYS(            XK_2,                      1)
-		TAGKEYS(            XK_3,                      2)
-		TAGKEYS(            XK_4,                      3)
-		TAGKEYS(            XK_5,                      4)
-		TAGKEYS(            XK_6,                      5)
-		TAGKEYS(            XK_7,                      6)
-		TAGKEYS(            XK_8,                      7)
-		TAGKEYS(            XK_9,                      8)
-		{ MODKEY|ShiftMask, XK_q,      quit,           {0} },
+	TAGKEYS(            XK_2,                      1)
+	TAGKEYS(            XK_3,                      2)
+	TAGKEYS(            XK_4,                      3)
+	TAGKEYS(            XK_5,                      4)
+	TAGKEYS(            XK_6,                      5)
+	TAGKEYS(            XK_7,                      6)
+	TAGKEYS(            XK_8,                      7)
+	TAGKEYS(            XK_9,                      8)
+	{ MODKEY|ShiftMask, XK_q,      quit,           {0} },
 };
 
 /* button definitions */
