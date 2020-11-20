@@ -94,8 +94,6 @@ static const char *filemanagercmd[] = { "nautilus", NULL };
 static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
 
 // Brightness and display
-static const char *brightup[]   = { "light", "-A", "5", NULL };
-static const char *brightdown[] = { "light", "-U", "5", NULL };
 static const char *autorandr[]  = { "AutoRandR", NULL };
 
 // Audio commands
@@ -119,8 +117,8 @@ static Key keys[] = {
 	{ 0,                 XK_Print,   spawn,         {.v = screencapcmd } },
 
 	// Brightness
-	{ 0,  XF86XK_MonBrightnessUp,    spawn,  {.v = brightup } },
-	{ 0,  XF86XK_MonBrightnessDown,  spawn,  {.v = brightdown } },
+	{ 0,  XF86XK_MonBrightnessUp,    spawn,  SHCMD("light -A 5; pkill -RTMIN+11 dwmblocks") },
+	{ 0,  XF86XK_MonBrightnessDown,  spawn,  SHCMD("light -U 5; pkill -RTMIN+11 dwmblocks") },
 
 	// Audio
 	{ 0,       XF86XK_AudioRaiseVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
