@@ -137,7 +137,7 @@ static Key keys[] = {
 	{ 0,       XF86XK_AudioMicMute,      spawn,  {.v = togglemutemic } },
 
 	// Display
-	{ 0,  XK_p,  spawn,  {.v = autorandr } }, // Mod+p is actually the display key on laptops
+	{ MODKEY,  XK_p,  spawn,  {.v = autorandr } }, // Mod+p is actually the display key on laptops
 
 	// Main dwm stuff
 	{ MODKEY,            XK_b,       togglebar,       {0} },
