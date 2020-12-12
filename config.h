@@ -37,10 +37,14 @@ static const unsigned int alphas[][3]      = {
 	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
+static const char term[]        = "alacritty";
+static const char webbrowser[]  = "brave";
+static const char filemanager[] = "nautilus";
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 // static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
-static const char *tagDefaults[] = { "alacritty", "brave", "onlyoffice-desktopeditors", "nautilus", "spotify", "lutris", "krita", "reaper", "discord" };
+static const char *tagDefaults[] = { term, webbrowser, "onlyoffice-desktopeditors", filemanager, "spotify", "lutris", "krita", "reaper", "discord" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -89,8 +93,9 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]       = { "dmenu_run", "-b", "-m", "-4", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray2, "-sf", col_gray4, NULL };
 static const char *rofiappmenu[]    = { "rofi", "-monitor", "-4", "-matching", "regex", "-show", "drun", "-modi", "drun", NULL };
-static const char *termcmd[]        = { "alacritty", NULL };
-static const char *filemanagercmd[] = { "nautilus", NULL };
+static const char *termcmd[]        = { term, NULL };
+static const char *browsercmd[]     = { webbrowser, NULL };
+static const char *filemanagercmd[] = { filemanager, NULL };
 static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
 
 // Brightness and display
@@ -108,11 +113,12 @@ static Key keys[] = {
 	/* modifier          key         function       argument */
 
 	// Applications
-	{ MODKEY,            XK_p,       spawn,         {.v = dmenucmd } },
+	{ MODKEY,            XK_d,       spawn,         {.v = dmenucmd } },
 	{ MODKEY,            XK_e,       spawn,         {.v = rofiappmenu } },
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
 	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
+	{ MODKEY|ShiftMask,  XK_s,       spawn,         {.v = browsercmd } },
 	{ MODKEY|ShiftMask,  XK_r,       spawn,         SHCMD("researchPapers") },
 	{ 0,                 XK_Print,   spawn,         {.v = screencapcmd } },
 
@@ -131,7 +137,7 @@ static Key keys[] = {
 	{ 0,       XF86XK_AudioMicMute,      spawn,  {.v = togglemutemic } },
 
 	// Display
-	{ 0,  XF86XK_Display,  spawn,  {.v = autorandr } },
+	{ 0,  XK_p,  spawn,  {.v = autorandr } }, // Mod+p is actually the display key on laptops
 
 	// Main dwm stuff
 	{ MODKEY,            XK_b,       togglebar,       {0} },
