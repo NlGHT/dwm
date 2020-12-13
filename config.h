@@ -97,6 +97,7 @@ static const char *termcmd[]        = { term, NULL };
 static const char *browsercmd[]     = { webbrowser, NULL };
 static const char *filemanagercmd[] = { filemanager, NULL };
 static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
+static const char *xkillcmd[]       = { "xkill", NULL };
 
 // Brightness and display
 static const char *autorandr[]  = { "AutoRandR", NULL };
@@ -117,6 +118,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_e,       spawn,         {.v = rofiappmenu } },
 	{ MODKEY,            XK_Return,  spawn,         {.v = termcmd } },
 	{ MODKEY|ShiftMask,  XK_x,       spawnDefault,  {0} },
+	{ MODKEY,            XK_x,       spawn,         {.v = xkillcmd} },
 	{ MODKEY|ShiftMask,  XK_e,       spawn,         {.v = filemanagercmd } },
 	{ MODKEY|ShiftMask,  XK_s,       spawn,         {.v = browsercmd } },
 	{ MODKEY|ShiftMask,  XK_r,       spawn,         SHCMD("researchPapers") },
