@@ -336,8 +336,8 @@ static Colormap cmap;
 static xcb_connection_t *xcon;
 
 // For spawnDefault
-static unsigned int lastchosentag = 1;
-static unsigned int previouschosentag = 1;
+static int chosentag[32];
+static int previouschosentag[32];
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1779,17 +1779,17 @@ setfullscreen(Client *c, int fullscreen)
 void
 setlasttag(unsigned int tagbit) {
 	if (tagbit > 0) {
-		unsigned i = 1, pos = 1;
+		unsigned i = 1, pos = 0;
 		while (!(i & tagbit)) {
 			i = i << 1;
 			++pos;
 		}
-		lastchosentag = pos;
-		fprintf(stderr, "Last chosen tag set: %d\n", lastchosentag);
+		previouschosentag[selmon->num] = chosentag[selmon->num];
+		chosentag[selmon->num] = pos;
 	} else {
-		const unsigned int tempTag = lastchosentag;
-		lastchosentag = previouschosentag;
-		previouschosentag = tempTag;
+		const int tempTag = chosentag[selmon->num];
+		chosentag[selmon->num] = previouschosentag[selmon->num];
+		previouschosentag[selmon->num] = tempTag;
 	}
 }
 
@@ -1964,8 +1964,8 @@ spawn(const Arg *arg)
 void
 spawnDefault(const Arg *arg)
 {
-	if (tagDefaults[lastchosentag - 1]) {
-		const char *defaultcmd[] = {tagDefaults[lastchosentag - 1], NULL};
+	if (tagDefaults[chosentag[selmon->num]]) {
+		const char *defaultcmd[] = {tagDefaults[chosentag[selmon->num]], NULL};
 		Arg a = {.v = defaultcmd};
 		spawn(&a);
 	}
