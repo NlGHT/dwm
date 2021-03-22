@@ -64,6 +64,7 @@ static const Rule rules[] = {
 	{ "Caprine"   , NULL , NULL           , 1 << 8 , 0 , 0 , 0 , -1 } ,
 	{ "Alacritty" , NULL , NULL           , 0      , 0 , 1 , 0 , -1 } ,
 	{ NULL        , NULL , "Event Tester" , 0      , 0 , 0 , 1 , -1 } , /* xev */
+	{ "Peek"      , NULL , NULL           , 0      , 1 , 0 , 0 , -1 } , /* xev */
 };
 
 /* layout(s) */
@@ -97,6 +98,7 @@ static const char *termcmd[]        = { term, NULL };
 static const char *browsercmd[]     = { webbrowser, NULL };
 static const char *filemanagercmd[] = { filemanager, NULL };
 static const char *screencapcmd[]   = { "flameshot", "gui", NULL };
+static const char *gifcapcmd[]       = { "peek", NULL };
 static const char *xkillcmd[]       = { "xkill", NULL };
 
 // Brightness and display
@@ -123,6 +125,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,  XK_s,       spawn,         {.v = browsercmd } },
 	{ MODKEY|ShiftMask,  XK_r,       spawn,         SHCMD("researchPapers") },
 	{ 0,                 XK_Print,   spawn,         {.v = screencapcmd } },
+	{ MODKEY,            XK_Print,   spawn,         {.v = gifcapcmd } },
 
 	// Brightness
 	{ 0,  XF86XK_MonBrightnessUp,    spawn,  SHCMD("light -A 5; pkill -RTMIN+11 dwmblocks") },
