@@ -38,7 +38,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 static const char term[]        = "alacritty";
-static const char webbrowser[]  = "brave";
+static const char webbrowser[]  = "librewolf";
 static const char filemanager[] = "nautilus";
 
 /* tagging */
@@ -63,8 +63,10 @@ static const Rule rules[] = {
 	{ "Discord"   , NULL , NULL           , 1 << 8 , 0 , 0 , 0 , -1 } ,
 	{ "Caprine"   , NULL , NULL           , 1 << 8 , 0 , 0 , 0 , -1 } ,
 	{ "Alacritty" , NULL , NULL           , 0      , 0 , 1 , 0 , -1 } ,
+	{ "cool-retro-term" , NULL , NULL     , 0      , 0 , 1 , 0 , -1 } ,
 	{ NULL        , NULL , "Event Tester" , 0      , 0 , 0 , 1 , -1 } , /* xev */
-	{ "Peek"      , NULL , NULL           , 0      , 1 , 0 , 0 , -1 } , /* xev */
+	{ NULL        , NULL , "Untitled"     , 0      , 0 , 0 , 1 , -1 } , /* Markdown Preview */
+	{ "Peek"      , NULL , NULL           , 0      , 1 , 0 , 0 , -1 } ,
 };
 
 /* layout(s) */
