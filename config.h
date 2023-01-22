@@ -66,7 +66,9 @@ static const Rule rules[] = {
 	{ "cool-retro-term" , NULL , NULL     , 0      , 0 , 1 , 0 , -1 } ,
 	{ NULL        , NULL , "Event Tester" , 0      , 0 , 0 , 1 , -1 } , /* xev */
 	{ NULL        , NULL , "Untitled"     , 0      , 0 , 0 , 1 , -1 } , /* Markdown Preview */
+	{ NULL        , NULL , "iZotope Product Portal", 0 , 0 , 0 , 1 , -1 } ,
 	{ "Peek"      , NULL , NULL           , 0      , 1 , 0 , 0 , -1 } ,
+    { "krita"     , NULL , "Krita - Edit Text", 0, 1, 0, 1, -1 } ,
 };
 
 /* layout(s) */
@@ -134,8 +136,8 @@ static Key keys[] = {
 	{ 0,  XF86XK_MonBrightnessDown,  spawn,  SHCMD("light -U 5; pkill -RTMIN+11 dwmblocks") },
 
 	// Audio
-	{ 0,       XF86XK_AudioRaiseVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
-	{ 0,       XF86XK_AudioLowerVolume,  spawn,  SHCMD("amixer -D pulse sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
+	{ 0,       XF86XK_AudioRaiseVolume,  spawn,  SHCMD("amixer sset Master 5%+; pkill -RTMIN+12 dwmblocks") },
+	{ 0,       XF86XK_AudioLowerVolume,  spawn,  SHCMD("amixer sset Master 5%-; pkill -RTMIN+12 dwmblocks") },
 	{ 0,       XF86XK_AudioMute,         spawn,  {.v = togglemuteaudio } },
 	{ MODKEY,  XK_i,                     spawn,  {.v = pulseAudioSettings } },
 	{ 0,       XF86XK_AudioNext,         spawn,  {.v = nextsong } },
